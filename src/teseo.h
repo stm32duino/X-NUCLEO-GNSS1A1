@@ -66,13 +66,6 @@ extern "C" {
  */
 #define GNSS_BUS_I2C  (2U)
 
-/**
- * @}
- */
-
-/** @defgroup COMMON_EXPORTED_TYPES EXPORTED TYPES
- * @{
- */
 
 /**
  * @brief Data structure for the GNSS message.

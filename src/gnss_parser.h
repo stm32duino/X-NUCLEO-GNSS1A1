@@ -80,13 +80,6 @@ extern "C" {
  */
 #define NMEA_MSGS_NUM 14 //Note: update this constant coherently to eMsg enum type
 
-/**
- * @}
- */
-
-/** @defgroup LibGNSS_EXPORTED_TYPES EXPORTED TYPES
- * @{
- */
 
 /**
  * @brief Enumeration structure that contains the two states of a parsing dispatcher process
