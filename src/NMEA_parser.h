@@ -53,27 +53,6 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
 
-/** @defgroup MIDDLEWARES MIDDLEWARES
- *  @{
- */
-
-/** @defgroup ST ST
- *  @{
- */
-
-/** @defgroup STM32_GNSS STM32_GNSS
- *  @brief Contains all platform independent modules (eg. NMEA Sentence Parser, ...).
- *  @{
- */
- 
-/** @defgroup LibNMEA LibNMEA
- *  @brief NMEA sentences parsing module.
- *  @{
- */
-
-/** @defgroup LibNMEA_CONSTANTS_DEFINITIONS CONSTANTS DEFINITIONS
- * @{
- */
 
 /* Exported defines ----------------------------------------------------------*/
 
@@ -399,30 +378,7 @@ typedef struct {
   OpResult_t result;
 } PSTMAGPS_Info_t;
 
-/**
- * @}
- */
 
-
-/**
- * @}
- */
-
-/**
- * @}
- */
-  
-/**
- * @}
- */
-  
-/**
- * @}
- */ 
-
-/**
- * @}
- */
  
 #ifdef __cplusplus
 }

@@ -52,29 +52,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "NMEA_parser.h"
-//#include "gnss_geofence.h"
-//#include "gnss_datalog.h"
   
-/** @addtogroup MIDDLEWARES
- *  @{
- */
-
-/** @addtogroup ST
- *  @{
- */
-
-/** @addtogroup STM32_GNSS
- *  @{
- */
- 
-/** @defgroup LibGNSS LibGNSS
- *  @brief Module handling GNSS parsed data and advanced features.
- *  @{
- */
-
-/** @defgroup LibGNSS_CONSTANTS_DEFINITIONS CONSTANTS DEFINITIONS
- * @{
- */
 
 /**
  * @brief Constant that indicates the maximum number of positions that can be stored.
@@ -171,26 +149,6 @@ typedef struct
   OpResult_t result;
 } GNSSParser_Data_t;
 
-/**
- * @}
- */
-
-
-/**
- * @}
- */
-
-/**
- * @}
- */
-
-/**
- * @}
- */
-
-/**
- * @}
- */
 
 
 #ifdef __cplusplus

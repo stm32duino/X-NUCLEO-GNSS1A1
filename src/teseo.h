@@ -54,26 +54,6 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
 
-/** @addtogroup DRIVERS
- * @{
- */
- 
-/** @addtogroup BSP
- * @{
- */
-
-/** @addtogroup COMPONENTS
- * @{
- */
-
-/** @addtogroup COMMON COMMON
- * @brief Defines the GNSS Driver object and related types.
- * @{
- */
-
-/** @addtogroup COMMON_EXPORTED_DEFINES EXPORTED DEFINES
- * @{
- */
 
 /* Exported defines ----------------------------------------------------------*/
 /**
@@ -125,44 +105,7 @@ typedef struct
   void *pVTable; /**< Pointer to the Virtual Table Function. */
 } GNSS_HandleTypeDef;
 
-/**
- * @brief Data structure that contains the abstract method
- * to be implemented (and assigned) by the GNSS driver.
- */
-//typedef struct
-//{
-  //GNSS_StatusTypeDef    (*Bus_OnOff)(GNSS_HandleTypeDef *pGNSS, uint8_t enable, int8_t nr_msg); /**< Bus UART/I2C OnOff driver abstract method */
-  //GNSS_StatusTypeDef    (*Bus_Enable)(GNSS_HandleTypeDef *pGNSS); /**< Bus UART/I2C Enable driver abstract method */
-  //GNSS_StatusTypeDef    (*Bus_Disable)(GNSS_HandleTypeDef *pGNSS); /**< Bus I2C Disable driver abstract method */
-  //const GNSS_MsgTypeDef*(*Get_Buffer)(GNSS_HandleTypeDef *pGNSS); /**< Get Data Buffer driver abstract method */
-  //GNSS_StatusTypeDef    (*Release_Buffer)(GNSS_HandleTypeDef *pGNSS, const GNSS_MsgTypeDef *pGNSS_Msg); /**< Release Data Buffer driver abstract method */
-  //GNSS_StatusTypeDef    (*Bus_Write)(GNSS_HandleTypeDef *pHandle, uint8_t *pBuffer, uint16_t lenght, uint32_t timeout);
-  //void                  (*Bus_RxCallback)(GNSS_HandleTypeDef *pGNSS);
-  //void                  (*Bus_ErrorCallback)(GNSS_HandleTypeDef *pGNSS);
-  //void                  (*Bus_AbortCallback)(GNSS_HandleTypeDef *pGNSS);
-  //void                  (*Bus_BackgroundProcess)(const GNSS_HandleTypeDef *pGNSS);
 
-//} GNSS_DrvTypeDef;
-
-/**
- * @}
- */
-
-/**
- * @}
- */
-
-/**
- * @}
- */
-
-/**
- * @}
- */
-
-/**
- * @}
- */ 
 #ifdef __cplusplus
 }
 #endif
