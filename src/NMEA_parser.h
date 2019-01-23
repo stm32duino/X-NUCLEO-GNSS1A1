@@ -119,10 +119,6 @@ enum {
   SIMULATION_MODE = 8   /**< Simulation Mode Fix status */
 };
 
-/** @defgroup LibNMEA_EXPORTED_TYPES EXPORTED TYPES
- * @{
- */
-
 /**
  * @brief MISRA compliant typedef for float
  */
