@@ -4,7 +4,7 @@
   * @author  AST/CL
   * @version V2.0.0
   * @date    Feb-2018
-  * @brief   This file provides set of driver functions to manage communication 
+  * @brief   This file provides set of driver functions to manage communication
   * @brief   between MCU and Teseo
   *
   *******************************************************************************
@@ -72,8 +72,8 @@ extern "C" {
  */
 typedef struct
 {
-  uint8_t *buf;
-  uint32_t len;
+   uint8_t *buf;
+   uint32_t len;
 } GNSS_MsgTypeDef;
 
 /**
@@ -81,10 +81,10 @@ typedef struct
  */
 typedef enum
 {
-  GNSS_OK = 0,
-  GNSS_ERROR,
-  GNSS_TIMEOUT,
-  GNSS_NOT_IMPLEMENTED
+   GNSS_OK = 0,
+   GNSS_ERROR,
+   GNSS_TIMEOUT,
+   GNSS_NOT_IMPLEMENTED
 } GNSS_StatusTypeDef;
 
 /**
@@ -92,10 +92,10 @@ typedef enum
  */
 typedef struct
 {
-  uint8_t bus;
+   uint8_t bus;
 
-  void *pData;   /**< Pointer to the effective data object */	
-  void *pVTable; /**< Pointer to the Virtual Table Function. */
+   void *pData;   /**< Pointer to the effective data object */
+   void *pVTable; /**< Pointer to the Virtual Table Function. */
 } GNSS_HandleTypeDef;
 
 
