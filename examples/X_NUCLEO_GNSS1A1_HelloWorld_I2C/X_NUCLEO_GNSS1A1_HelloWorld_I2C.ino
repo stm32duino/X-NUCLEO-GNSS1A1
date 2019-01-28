@@ -58,19 +58,24 @@ int waitType = 0;
 #define waitForRequest 0
 #define waitForAnswer 1
 
-#ifdef ARDUINO_SAM_DUE
-#define Wire Wire1
-#endif
+TwoWire *devI2C;
+
+
 
 void setup()
 {
    //Initialize serial port for user communication
+#ifdef ARDUINO_SAM_DUE
+   devI2C = &Wire1;
+#else
+   devI2C = &Wire;
+#endif
    Serial.begin(115200);
    Serial.println("Setup begin");
    //Initialize the i2c communication
-   Wire.begin();
+   devI2C->begin();
    //Create the device object passing to it the i2c interface
-   gps = new TeseoLIV3F(&Wire, 7, 13);
+   gps = new TeseoLIV3F(devI2C, 7, 13);
    //Initialize the device
    gps->init();
    Serial.println("Setup end");
