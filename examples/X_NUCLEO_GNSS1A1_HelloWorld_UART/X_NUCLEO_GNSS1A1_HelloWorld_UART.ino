@@ -38,6 +38,9 @@
  ******************************************************************************
  */
 
+//NOTE: for compatibility with the Arduino Due some additional cabling needs to be performed:
+//      pin D8 should be connected to pin D18 and pin D2 should be connected to pin D19
+
 #include "teseo_liv3f_class.h"
 
 TeseoLIV3F *gps;
@@ -52,7 +55,10 @@ GPGGA_Info_t stored_positions[64];
 int status = 0;
 int stime = 0;
 int waitType = 0;
+
+#ifdef ARDUINO_ARCH_STM32
 HardwareSerial Serial1(PA10, PA9);
+#endif
 
 #define MSG_SZ 256
 #define waitForRequest 0
