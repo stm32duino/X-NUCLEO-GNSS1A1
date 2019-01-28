@@ -58,6 +58,10 @@ int waitType = 0;
 #define waitForRequest 0
 #define waitForAnswer 1
 
+#ifdef ARDUINO_SAM_DUE
+#define Wire Wire1
+#endif
+
 void setup()
 {
    //Initialize serial port for user communication
