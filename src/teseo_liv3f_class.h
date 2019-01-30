@@ -124,7 +124,6 @@ public:
       digitalWrite(pinRes, LOW);
       delay(1000);
       digitalWrite(pinRes, HIGH);
-      digitalWrite(pinEn, HIGH);
       delay(5000);
       GNSS_PARSER_Init(&data);
       if (useI2C)
@@ -138,6 +137,9 @@ public:
 #endif
          Wire.begin();
       }
+      sendCommand("$PSTMRESTOREPAR");
+      sendCommand("$PSTMSRR");
+      delay(4000);
       return GNSS_OK;
    }
 
