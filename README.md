@@ -7,7 +7,7 @@ This device uses alternatively I2C or UART to communicate. An I2C or UART instan
   
 ## Examples
 
-There are 4 examples with the  X-NUCLEO-GNSS1A1 library.
+There are 5 examples with the  X-NUCLEO-GNSS1A1 library.
 
 * X_NUCLEO_GNSS1A1_HelloWorld_I2C: This example code provides a simple command line interface
   to communicate with the sensor via I2C protocol
@@ -21,11 +21,18 @@ There are 4 examples with the  X-NUCLEO-GNSS1A1 library.
 * X_NUCLEO_GNSS1A1_MicroNMEA_UART: This example code shows how to communicate with the sensor via 
   UART protocol using the lightweight Arduino MicroNMEA library. 
 
+* X_NUCLEO_GNSS1A1_VirtualCOMPort: This example code should be uploaded to the board in order to perform a
+  firmware upgrade using the Flash Updater java application. 
+
 ## Dependencies
 
 The X-NUCLEO-GNSS1A1 library requires the following Arduino library:
 
 * MicroNMEA: https://github.com/stevemarple/MicroNMEA
+
+In order to perform the firmware upgrade, the following Java application should be used:
+
+* Flash Updater: https://github.com/stm32duino/Teseo-LIV3F-Flash-Updater
 
 ## Note
 
