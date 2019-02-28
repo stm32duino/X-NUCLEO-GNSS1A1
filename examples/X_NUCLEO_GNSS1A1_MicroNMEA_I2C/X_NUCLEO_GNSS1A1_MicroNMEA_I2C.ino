@@ -140,11 +140,11 @@ void setup(void)
    console.println("... done");
 
    // Change the echoing messages to the ones recognized by the MicroNMEA library
-   sendCommand("$PSTMSETPAR,1231,0x00000042");
-   sendCommand("$PSTMSAVEPAR");
+   sendCommand((char *)"$PSTMSETPAR,1231,0x00000042");
+   sendCommand((char *)"$PSTMSAVEPAR");
 
    //Reset the device so that the changes could take plaace
-   sendCommand("$PSTMSRR");
+   sendCommand((char *)"$PSTMSRR");
 
    delay(4000);
 
@@ -168,8 +168,8 @@ void setup(void)
    }
    while ((uint8_t) c != 0xFF);
 
-   pinMode(2, INPUT);
-   attachInterrupt(digitalPinToInterrupt(2), ppsHandler, RISING);
+   pinMode(6, INPUT);
+   attachInterrupt(digitalPinToInterrupt(6), ppsHandler, RISING);
 }
 
 void loop(void)

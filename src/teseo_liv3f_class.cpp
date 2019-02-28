@@ -1030,7 +1030,7 @@ ParseStatus_t TeseoLIV3F::NMEA_ParsePSTMGeofence(Geofence_Info_t *pGeofence, uin
             scan_timestamp_date(app[2], &pGeofence->timestamp);
 
             int32_t *geofence_status = pGeofence->status;
-            for(int8_t i = 0; i < MAX_GEOFENCES_NUM; i++)
+            for(uint8_t i = 0; i < MAX_GEOFENCES_NUM; i++)
             {
                *(&geofence_status[i]) = strtol((char *)app[3+i], NULL, BASE);
             }
