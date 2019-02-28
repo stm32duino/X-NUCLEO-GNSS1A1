@@ -168,8 +168,8 @@ void setup(void)
    }
    while ((uint8_t) c != 0xFF);
 
-   pinMode(6, INPUT);
-   attachInterrupt(digitalPinToInterrupt(6), ppsHandler, RISING);
+   pinMode(2, INPUT);
+   attachInterrupt(digitalPinToInterrupt(2), ppsHandler, RISING);
 }
 
 void loop(void)
