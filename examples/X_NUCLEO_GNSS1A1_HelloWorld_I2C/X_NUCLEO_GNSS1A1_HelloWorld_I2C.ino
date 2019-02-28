@@ -51,7 +51,7 @@ uint32_t t, s;
 int tracked;
 GPGGA_Info_t stored_positions[64];
 int status = 0;
-int stime = 0;
+uint32_t stime = 0;
 int waitType = 0;
 
 #define MSG_SZ 256
@@ -60,6 +60,7 @@ int waitType = 0;
 
 #ifdef ARDUINO_SAM_DUE
 #define DEV_I2C Wire1
+#include <avr/dtostrf.h>
 #endif
 
 #ifdef ARDUINO_ARCH_STM32
@@ -173,8 +174,8 @@ void waitResponse()
             Serial.print("Saving NMEA msg configuration...\t");
             Serial.print("\r\n>");
             //send the message to save the new parameters and start waiting
-            gps->sendCommand("$PSTMSAVEPAR");
-            gps->askMessage("$PSTMSAVEPAR");
+            gps->sendCommand((char *)"$PSTMSAVEPAR");
+            gps->askMessage((char *)"$PSTMSAVEPAR");
             waitType=3;
             stime = millis();
          }
@@ -280,7 +281,7 @@ void AppCmdProcess (char *cmd)
       {
          //send the version command and wait for response
          gps->sendCommand(cmd);
-         gps->askMessage("$PSTMVER");
+         gps->askMessage((char *)"$PSTMVER");
          status = waitForAnswer;
          waitType=1;
          stime = millis();
@@ -330,7 +331,7 @@ void AppCmdProcess (char *cmd)
 
          gps->sendCommand(gnssCmd);
 
-         gps->askMessage("$PSTMCFGMSGL");
+         gps->askMessage((char *)"$PSTMCFGMSGL");
          status = waitForAnswer;
          waitType=2;
          stime = millis();
@@ -526,7 +527,7 @@ void getGNSInfo()
    dtostrf (data.gns_data.hdop, 2, 1, hdop);
    dtostrf (data.gns_data.geo_sep, 2, 1, geoid);
 
-   snprintf(msg, MSG_SZ,  "UTC:\t\t\t[ %02d:%02d:%02d ]\r\n",
+   snprintf(msg, MSG_SZ,  "UTC:\t\t\t[ %02ld:%02ld:%02ld ]\r\n",
             data.gns_data.utc.hh,
             data.gns_data.utc.mm,
             data.gns_data.utc.ss);
@@ -584,7 +585,7 @@ void getGPGSTInfo()
    dtostrf (data.gpgst_data.lon_err_dev, 2, 1, lonerr);
    dtostrf (data.gpgst_data.alt_err_dev, 2, 1, alterr);
 
-   snprintf(msg, MSG_SZ,  "UTC:\t\t\t[ %02d:%02d:%02d ]\r\n",
+   snprintf(msg, MSG_SZ,  "UTC:\t\t\t[ %02ld:%02ld:%02ld ]\r\n",
             data.gpgst_data.utc.hh,
             data.gpgst_data.utc.mm,
             data.gpgst_data.utc.ss);
@@ -681,7 +682,7 @@ void getGPRMCInfo()
             trackgood);
    Serial.print(msg);
 
-   snprintf(msg, MSG_SZ, "Date (ddmmyy):\t\t\t[ %d ]\r\n",
+   snprintf(msg, MSG_SZ, "Date (ddmmyy):\t\t\t[ %ld ]\r\n",
             data.gprmc_data.date);
    Serial.print(msg);
 
@@ -757,7 +758,7 @@ void getGSAInfo()
       Serial.print("-- Unknown op mode\r\n");
    }
 
-   snprintf(msg, MSG_SZ, "Current Mode:\t\t[ %d ]\t\t",
+   snprintf(msg, MSG_SZ, "Current Mode:\t\t[ %ld ]\t\t",
             data.gsa_data.current_mode);
    Serial.print(msg);
 
@@ -781,7 +782,7 @@ void getGSAInfo()
    int32_t *sat_prn = data.gsa_data.sat_prn;
    for (uint8_t i=0; i<12U; i++)
    {
-      snprintf(msg, MSG_SZ, "SatPRN%02d:\t\t[ %d ]\r\n", i+1U,
+      snprintf(msg, MSG_SZ, "SatPRN%02d:\t\t[ %ld ]\r\n", i+1U,
                *(&sat_prn[i]));
       Serial.print(msg);
    }
@@ -856,29 +857,29 @@ void getGSVInfo()
       /* nothing to do */
    }
 
-   snprintf(msg, MSG_SZ, "GSV message:\t\t[ %d of %d ]\r\n", number, amount);
+   snprintf(msg, MSG_SZ, "GSV message:\t\t[ %ld of %ld ]\r\n", number, amount);
    Serial.print(msg);
 
-   snprintf(msg, MSG_SZ, "Num of Satellites:\t[ %d of %d ]\r\n", data.gsv_data.current_sats, tot_sats);
+   snprintf(msg, MSG_SZ, "Num of Satellites:\t[ %ld of %ld ]\r\n", data.gsv_data.current_sats, tot_sats);
    Serial.print(msg);
 
    Serial.print("\r\n");
 
    for (i=0; i<current_sats; i++)
    {
-      snprintf(msg, MSG_SZ, "Sat%02ldPRN:\t\t[ %03d ]\r\n", i+1+((number-1)*GSV_MSG_SATS),
+      snprintf(msg, MSG_SZ, "Sat%02ldPRN:\t\t[ %03ld ]\r\n", i+1+((number-1)*GSV_MSG_SATS),
                data.gsv_data.gsv_sat_i[i].prn);
       Serial.print(msg);
 
-      snprintf(msg, MSG_SZ, "Sat%02ldElev (%c):\t\t[ %03d ]\r\n", i+1+((number-1)*GSV_MSG_SATS), degree_ext_ASCII_char,
+      snprintf(msg, MSG_SZ, "Sat%02ldElev (%c):\t\t[ %03ld ]\r\n", i+1+((number-1)*GSV_MSG_SATS), degree_ext_ASCII_char,
                data.gsv_data.gsv_sat_i[i].elev);
       Serial.print(msg);
 
-      snprintf(msg, MSG_SZ, "Sat%02ldAzim (%c):\t\t[ %03d ]\r\n", i+1+((number-1)*GSV_MSG_SATS), degree_ext_ASCII_char,
+      snprintf(msg, MSG_SZ, "Sat%02ldAzim (%c):\t\t[ %03ld ]\r\n", i+1+((number-1)*GSV_MSG_SATS), degree_ext_ASCII_char,
                data.gsv_data.gsv_sat_i[i].azim);
       Serial.print(msg);
 
-      snprintf(msg, MSG_SZ, "Sat%02ldCN0 (dB):\t\t[ %03d ]\r\n", i+1+((number-1)*GSV_MSG_SATS),
+      snprintf(msg, MSG_SZ, "Sat%02ldCN0 (dB):\t\t[ %03ld ]\r\n", i+1+((number-1)*GSV_MSG_SATS),
                data.gsv_data.gsv_sat_i[i].cn0);
       Serial.print(msg);
 
@@ -910,7 +911,7 @@ void printHelp(void)
 int trackGotPos(uint32_t how_many, uint32_t time)
 {
    int tracked = 0;
-   int i = 0;
+   uint32_t i = 0;
    int startTime = millis();
    while (i<how_many)
    {
@@ -923,7 +924,7 @@ int trackGotPos(uint32_t how_many, uint32_t time)
             break;
          }
          tracked++;
-         snprintf(msg, MSG_SZ,  "Position %d just get.\r\n", i + 1U);
+         snprintf(msg, MSG_SZ,  "Position %ld just get.\r\n", i + 1U);
          Serial.print(msg);
          if(data.debug == DEBUG_ON)
             printValidInfo();
@@ -948,10 +949,10 @@ void printTrackedPositions (uint32_t how_many)
       dtostrf (stored_positions[i].xyz.alt, 3, 2, alt);
       dtostrf (stored_positions[i].acc, 4, 1, acc);
 
-      snprintf(msg, MSG_SZ,  "Position n. %d:\r\n", i + 1U);
+      snprintf(msg, MSG_SZ,  "Position n. %ld:\r\n", i + 1U);
       Serial.print(msg);
 
-      snprintf(msg, MSG_SZ,  "UTC:\t\t\t[ %02d:%02d:%02d ]\r\n",
+      snprintf(msg, MSG_SZ,  "UTC:\t\t\t[ %02ld:%02ld:%02ld ]\r\n",
                stored_positions[i].utc.hh, stored_positions[i].utc.mm, stored_positions[i].utc.ss);
       Serial.print(msg);
 
@@ -967,7 +968,7 @@ void printTrackedPositions (uint32_t how_many)
                stored_positions[i].xyz.ew);
       Serial.print(msg);
 
-      snprintf(msg, MSG_SZ,  "Satellites locked:\t[ %d ]\r\n",
+      snprintf(msg, MSG_SZ,  "Satellites locked:\t[ %ld ]\r\n",
                stored_positions[i].sats);
       Serial.print(msg);
 
@@ -980,12 +981,12 @@ void printTrackedPositions (uint32_t how_many)
                (stored_positions[i].xyz.mis + 32U));
       Serial.print(msg);
 
-      snprintf(msg, MSG_SZ,  "Geoid infos:\t\t[ %d%c ]\r\n",
+      snprintf(msg, MSG_SZ,  "Geoid infos:\t\t[ %ld%c ]\r\n",
                stored_positions[i].geoid.height,
                stored_positions[i].geoid.mis);
       Serial.print(msg);
 
-      snprintf(msg, MSG_SZ,  "Diff update:\t\t[ %d ]\r\n",
+      snprintf(msg, MSG_SZ,  "Diff update:\t\t[ %ld ]\r\n",
                stored_positions[i].update);
       Serial.print(msg);
 

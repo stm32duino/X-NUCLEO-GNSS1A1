@@ -137,8 +137,8 @@ public:
 #endif
          Wire.begin();
       }
-      sendCommand("$PSTMRESTOREPAR");
-      sendCommand("$PSTMSRR");
+      sendCommand((char *)"$PSTMRESTOREPAR");
+      sendCommand((char *)"$PSTMSRR");
       delay(4000);
       return GNSS_OK;
    }
