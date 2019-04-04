@@ -206,7 +206,7 @@ void waitResponse ()
       }
    }
    //if the timer expired (10s)
-   if (millis() > (stime + 10000))
+   else if (millis() > (stime + 10000))
    {
       //wait for user interaction
       Serial.print("Timed out\r\n>");
