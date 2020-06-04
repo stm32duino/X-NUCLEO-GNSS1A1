@@ -66,6 +66,8 @@ HardwareSerial Serial1(PA10, PA9);
 
 #ifdef ARDUINO_SAM_DUE
 #include <avr/dtostrf.h>
+#elif defined(ARDUINO_ARCH_STM32)
+#include <avr/dtostrf.h>
 #endif
 
 
