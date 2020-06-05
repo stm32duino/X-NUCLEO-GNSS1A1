@@ -58,15 +58,15 @@ int waitType = 0;
 #define waitForRequest 0
 #define waitForAnswer 1
 
-#ifdef ARDUINO_SAM_DUE
+#if defined(ARDUINO_SAM_DUE)
 #define DEV_I2C Wire1
 #include <avr/dtostrf.h>
-#endif
-
-#ifdef ARDUINO_ARCH_STM32
+#elif defined(ARDUINO_ARCH_STM32L0)
+#define DEV_I2C Wire
+#include <avr/dtostrf.h>
+#elif defined(ARDUINO_ARCH_STM32)
 #define DEV_I2C Wire
 #endif
-
 
 void setup()
 {
