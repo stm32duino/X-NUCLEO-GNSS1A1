@@ -64,7 +64,9 @@ HardwareSerial Serial1(PA10, PA9);
 #define waitForRequest 0
 #define waitForAnswer 1
 
-#ifdef ARDUINO_SAM_DUE
+#if defined(ARDUINO_SAM_DUE)
+#include <avr/dtostrf.h>
+#elif defined(ARDUINO_ARCH_STM32L0)
 #include <avr/dtostrf.h>
 #endif
 

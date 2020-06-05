@@ -50,15 +50,13 @@
 
 #define RESET_PIN 7
 
-#ifdef ARDUINO_SAM_DUE
+#if defined(ARDUINO_SAM_DUE)
 #define DEV_I2C Wire1
-#endif
-
-#ifdef ARDUINO_ARCH_STM32
+#elif defined(ARDUINO_ARCH_STM32L0)
 #define DEV_I2C Wire
-#endif
-
-#ifdef ARDUINO_ARCH_AVR
+#elif defined(ARDUINO_ARCH_STM32)
+#define DEV_I2C Wire
+#elif defined(ARDUINO_ARCH_AVR)
 #define DEV_I2C Wire
 #endif
 
